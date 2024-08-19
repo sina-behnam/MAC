@@ -1,0 +1,6 @@
+/venv
+/data
+*.zip
+/models
+/runs
+/*.pt
