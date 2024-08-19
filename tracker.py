@@ -76,20 +76,23 @@ def main(args):
             if success:
                 # Run YOLOv8 tracking on the frame, persisting tracks between frames
                 results = model.track(frame, persist=True, show_labels=False, show=False, conf=args.confidence, tracker=args.tracker)
-
-                # Count the number of objects detected
-                object_count = len(results[0].boxes)
+                
+                object_count = 0
 
                 # Extract boxes from results and draw them manually
                 for result in results[0].boxes:
-                    # Extract bounding box coordinates (x1, y1, x2, y2)
+
+                    class_id = int(result.cls[0])
                     x1, y1, x2, y2 = map(int, result.xyxy[0].tolist())
-                    
-                    # Draw a thin bounding box without labels
-                    cv2.rectangle(frame, (x1, y1), (x2, y2), color=(0, 0, 255), thickness=8)
+
+                    # check if the class is a starfish
+                    if class_id == 1:
+                        object_count += 1
+                        # Draw a thin bounding box without labels
+                        cv2.rectangle(frame, (x1, y1), (x2, y2), color=(0, 0, 255), thickness=8)
 
                 # Add object count text on top of the frame
-                text = f"Object Count: {object_count}"
+                text = f"The Number of Starfish : {object_count}"
                 font = cv2.FONT_HERSHEY_SIMPLEX
                 font_scale = 1
                 color = (255, 0, 0)  # Blue text
