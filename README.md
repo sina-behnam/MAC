@@ -4,7 +4,11 @@
 
 This project focuses on training and testing a YOLOv8 model for detecting `brittle stars` in underwater images. The project includes custom dataset preparation, model training, and evaluation on the brittle star class using the YOLOv8 model.
 
-<iframe width="560" height="315" src="https://www.youtube.com/watch?v=zeGXB6fh-jM" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+## Tracking Demo
+
+[![Watch the video](https://youtu.be/zeGXB6fh-jM/0.jpg)](https://youtu.be/zeGXB6fh-jM)
+
+Click the image above to watch the tracking demo on YouTube.
 
 ## Project Structure
 
