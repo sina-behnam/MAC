@@ -1,14 +1,24 @@
 # Brittle Star Detection with YOLOv8
 
-![alt text](meta/image.png)
+![MATE ROV Competition](meta/image.png)
 
-This project focuses on training and testing a YOLOv8 model for detecting `brittle stars` in underwater images. The project includes custom dataset preparation, model training, and evaluation on the brittle star class using the YOLOv8 model.
+## Project Overview
+
+This project was developed by __Politocean MATE Teams__ in response to the __2024 MATE ROV Competition__ in partnership with NOAA Ocean Exploration.
+
+### MATE ROV Competition
+
+The competition presented a challenge focused on automating the process of annotating organisms in ROV dive videos, a task traditionally requiring extensive human involvement. The aim of this project is to streamline this process by leveraging Artificial Intelligence (AI) to detect and track a specific organism `brittle stars` throughout continuous video footage captured from an ROV submersible.
+
+### Brittle Star Detection
+
+This project focuses on training and testing a `YOLOv8` model for detecting `brittle stars` in underwater footage. The project includes custom dataset preparation, model training, and evaluation on the brittle star class using the YOLOv8 model.
 
 ## Tracking Demo
 
-[![Watch the video](https://youtu.be/zeGXB6fh-jM/0.jpg)](https://youtu.be/zeGXB6fh-jM)
+[Watch the video on YouTube](https://youtu.be/zeGXB6fh-jM)
 
-Click the image above to watch the tracking demo on YouTube.
+Click the link above to watch the tracking demo.
 
 ## Project Structure
 
@@ -29,7 +39,7 @@ This will install the `ultralytics` package, which includes the YOLOv8 model and
 
 ### Data Preparation
 
-The dataset was created and annotated by extracting frames from a given video, with annotations done both manually and with AI assistance. Initially, a small set of samples was manually annotated. This annotated data was used to train a model, which then made further annotations. These AI-generated annotations were corrected by humans, and the process was repeated multiple times to create a well-annotated dataset.
+The dataset was created and annotated by extracting frames from a given video (where you can find it under this like [Reference Footage](https://drive.google.com/file/d/1Wb9GjKUs6-hu4zLdTqaahYo66ZOhCXhr/view) ), with annotations done both manually and with AI assistance. Initially, a small set of samples was manually annotated. This annotated data was used to train a model, which then made further annotations. These AI-generated annotations were corrected by humans, and the process was repeated multiple times to create a well-annotated dataset.
 
 The script `annotator.py` was used to automate parts of this process, enabling efficient annotation and training cycles.
 
@@ -56,10 +66,6 @@ To get information about the available options, you can pass the `--help` flag
 ```shell
 python tracker.py --video input_video.mp4 --model yolov8m.pt --export_model --device cpu
 ```
-
-## Results and Plots
-
-The results and performance metrics, including precision, recall, mAP (mean Average Precision), and confusion matrix, will be saved in the `output/` directory. Training plots such as loss curves and accuracy trends will also be generated if `plots=True` is set during training.
 
 ## Acknowledgements
 
