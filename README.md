@@ -8,7 +8,9 @@ This project was developed by __Politocean MATE Teams__ in response to the __202
 
 ### MATE ROV Competition
 
-The competition presented a challenge focused on automating the process of annotating organisms in ROV dive videos, a task traditionally requiring extensive human involvement. The aim of this project is to streamline this process by leveraging Artificial Intelligence (AI) to detect and track a specific organism `brittle stars` throughout continuous video footage captured from an ROV submersible.
+The competition presented a challenge focused on automating the process of annotating organisms in ROV dive videos, a task traditionally requiring extensive human involvement. The aim of this project is to streamline this process by leveraging Artificial Intelligence (AI) to detect and track a specific organism `brittle stars` throughout continuous video footage captured from an ROV submersible. 
+
+> To find full details about the competition, please refer to the [official competition description](https://20693798.fs1.hubspotusercontent-na1.net/hubfs/20693798/2024%20OER%20MATE%20ROV%20Computer%20Coding%20Challenge%20Updated.pdf)
 
 ### Brittle Star Detection
 
@@ -70,3 +72,7 @@ python tracker.py --video input_video.mp4 --model yolov8m.pt --export_model --de
 ## Acknowledgements
 
 This project utilizes the YOLOv8 model by Ultralytics for object detection tasks. The custom dataset and annotations were specifically prepared for the brittle star detection task, with the help of manual and AI-assisted annotation processes.
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
