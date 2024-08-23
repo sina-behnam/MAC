@@ -75,7 +75,7 @@ def main(args):
 
             if success:
                 # Run YOLOv8 tracking on the frame, persisting tracks between frames
-                results = model.track(frame, persist=True, show_labels=False, show=False, conf=args.confidence, tracker=args.tracker)
+                results = model.track(frame, persist=True, show_conf=False, show=False, conf=args.confidence, tracker=args.tracker)
                 
                 object_count = 0
 
@@ -85,22 +85,44 @@ def main(args):
                     class_id = int(result.cls[0])
                     x1, y1, x2, y2 = map(int, result.xyxy[0].tolist())
 
-                    # check if the class is a starfish
                     if class_id == 1:
                         object_count += 1
-                        # Draw a thin bounding box without labels
-                        cv2.rectangle(frame, (x1, y1), (x2, y2), color=(0, 0, 255), thickness=8)
+                        # Prepare label
+                        label = "Starfish"
+                        font = cv2.FONT_HERSHEY_SIMPLEX
+                        font_scale = 0.7
+                        color = (255, 0, 0)  # blue
+                        thickness = 2
 
-                # Add object count text on top of the frame
-                text = f"The Number of Starfish : {object_count}"
-                font = cv2.FONT_HERSHEY_SIMPLEX
-                font_scale = 1
-                color = (255, 0, 0)  # Blue text
-                thickness = 4
-                position = (50, 50)  # Position the text at the top-left corner
-                
-                # Put the text on the frame
-                cv2.putText(frame, text, position, font, font_scale, color, thickness)
+                        # Draw a rectangle (bounding box)
+                        cv2.rectangle(frame, (x1, y1), (x2, y2), color, thickness)
+
+                        # Calculate text size for positioning
+                        (text_width, text_height), baseline = cv2.getTextSize(label, font, font_scale, thickness)
+
+                        # Position the text above the bounding box
+                        text_x = x1
+                        text_y = y1 - 10  # Position text above the bounding box
+
+                        # Ensure text is within the frame
+                        if text_y < 0:
+                            text_y = y1 + text_height + 10
+
+                        # Draw the label text
+                        cv2.putText(frame, label, (text_x, text_y), font, font_scale, color, thickness)
+
+                if args.show_count:
+                    # Add object count text on top of the frame
+                    text = f"The Number of Starfish : {object_count}"
+                    font = cv2.FONT_HERSHEY_SIMPLEX
+                    font_scale = 1
+                    color = (0, 0, 255)  # Red text
+                    thickness = 4
+                    position = (50, 50)  # Position the text at the top-left corner
+
+                    # Put the text on the frame
+                    cv2.putText(frame, text, position, font, font_scale, color, thickness)
+
 
                 if args.export:
                     # Write the annotated frame to the output video
@@ -140,6 +162,18 @@ if __name__ == "__main__":
         required=True, 
         help="Path to the input video file."
     )
+    parser.add_argument(
+        "--show_count",
+        action="store_true",
+        default=False,
+        help="Show the count of objects in the video."
+    )
+    # parser.add_argument(
+    #     "--just_starfish",
+    #     action="store_true",
+    #     default=True,
+    #     help="Show only detected brittle starfish in the video. otherwise it will also making bounding boxes over other detectable objects as `others`."
+    # )
     parser.add_argument(
         "--model", 
         type=str, 
