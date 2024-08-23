@@ -50,10 +50,18 @@ The script `annotator.py` was used to automate parts of this process, enabling e
 To train the YOLOv8 model on the custom dataset, use the following command:
 
 ```shell
-yolo task=detect mode=train model='yolov8m.yaml', pretrained='/models//best.pt' data='/content/MAC-4/data.yaml' epochs=100 imgsz=640 batch=16 name='FP_v7' 
+yolo task=detect mode=train model='yolov8m.yaml', pretrained='/models/best.pt' data='/content/MAC-4/data.yaml' epochs=100 imgsz=640 batch=16 name='FP_v7' 
 ```
 
-## Inference
+## Testing
+
+To test the YOLOv8 model on the custom dataset, use the following command:
+
+```shell
+yolo task=detect mode=test model='yolov8m.yaml', weights='/models/best.pt' data='/content/MAC-4/data.yaml' 
+```
+
+## Video Inference
 
 An Example of video inferencing by `tracker.py`, use the following command:
 
