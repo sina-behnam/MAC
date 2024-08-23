@@ -37,7 +37,7 @@ def main():
 
     if args.annotate:
         Annotator.annotate(
-            images=glob.glob(args.images),
+            images=glob.glob(os.path.join(args.images, "*.jpg")),
             output_path=args.output_path,
             method=args.method,
             model=args.model,
