@@ -3,4 +3,7 @@
 *.zip
 /models
 /runs
-/*.pt
+/*.pth
+/test_run
+/__pycache__
+.DS_Store
