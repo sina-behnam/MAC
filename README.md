@@ -25,7 +25,7 @@ Click the link above to watch the tracking demo.
 ## Project Structure
 
 - `tracker.py`:  The Script is designed for object tracking in video files using a trained YOLOv8 model. It allows users to perform real-time object detection and tracking, with options for saving the output by exporting it and displaying results.
-- `annotator.py`: Script that handles the annotation process by automating parts of the labeling, leveraging both manual annotations and AI-assisted predictions.
+- `dataprocessing.py`: Script that handles frame extraction from a given video and the annotation process by automating parts of the labeling, leveraging both manual annotations and AI-assisted predictions. 
 
 ## Installation
 
@@ -43,7 +43,26 @@ This will install the `ultralytics` package, which includes the YOLOv8 model and
 
 The dataset was created and annotated by extracting frames from a given video (where you can find it under this like [Reference Footage](https://drive.google.com/file/d/1Wb9GjKUs6-hu4zLdTqaahYo66ZOhCXhr/view) ), with annotations done both manually and with AI assistance. Initially, a small set of samples was manually annotated. This annotated data was used to train a model, which then made further annotations. These AI-generated annotations were corrected by humans, and the process was repeated multiple times to create a well-annotated dataset.
 
-The script `annotator.py` was used to automate parts of this process, enabling efficient annotation and training cycles.
+The script `dataprocessing.py` was used to automate parts of this process, enabling efficient annotation and training cycles.
+
+Here how it used for extracting frames from a video:
+
+```shell
+python dataprocessing.py --extract_frames --video_path /path/to/video.mp4 --output_folder /path/to/extracted_frames --frame_interval 30
+```
+
+And for annotating the frames:
+
+```shell
+python dataprocessing.py --annotate --images /path/to/extracted_frames --output_path /path/to/output/labels --method "automated" --model models/v8/best.pt --conf 0.2
+```
+
+> Note: the `manual` method has not been completely implemented yet, so it is recommended to use the `automated` method for this scripts. However, you can use the `labelImg` tool for manual annotation. that you need to install it by running the following command:
+
+```shell
+pip install labelImg
+```
+
 
 ## Training and Testing
 
@@ -85,7 +104,7 @@ You can also find a sample usage of this script in the Kaggle Notebook below:
 
 ## Acknowledgements
 
-This project utilizes the YOLOv8 model by Ultralytics for object detection tasks. The custom dataset and annotations were specifically prepared for the brittle star detection task, with the help of manual and AI-assisted annotation processes.
+This project utilizes the YOLOv8 model by Ultralytics for object detection tasks. The custom dataset and annotations were specifically prepared for the brittle star detection task, with the help of manual and AI-assisted annotation processes. You can find the full dataset and annotations in the [Roboflow Project](https://universe.roboflow.com/sina-6juio/mac-p9chv).
 
 ## License
 
