@@ -45,7 +45,7 @@ The dataset was created and annotated by extracting frames from a given video (w
 
 The script `annotator.py` was used to automate parts of this process, enabling efficient annotation and training cycles.
 
-## Training
+## Training and Testing
 
 To train the YOLOv8 model on the custom dataset, use the following command:
 
@@ -53,13 +53,15 @@ To train the YOLOv8 model on the custom dataset, use the following command:
 yolo task=detect mode=train model='yolov8m.yaml', pretrained='/models/best.pt' data='path/to_your/data.yaml' epochs=100 imgsz=640 batch=16 name='FP_v7' 
 ```
 
-## Testing
+### Testing
 
 To test the YOLOv8 model on the custom dataset, use the following command:
 
 ```shell
 yolo task=detect mode=test model='yolov8m.yaml', weights='/models/best.pt' data='path/to_your/data.yaml' 
 ```
+
+> You can also a Notebook that run the above commands in the Colab: <a href="https://colab.research.google.com/drive/1lNODOdyH-6XDyc6dgwnAaHWMA5Fn8ZkQ?usp=sharing"><img src="https://colab.research.google.com/assets/colab-badge.svg"  alt="Open MAC_TestTrain In Colab" ></a>
 
 ## Video Inference
 
