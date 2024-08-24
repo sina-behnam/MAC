@@ -63,6 +63,13 @@ def main(args):
     # Get the total number of frames in the video
     total_frames = int(cap.get(cv2.CAP_PROP_FRAME_COUNT))
 
+    # Initialize the frame number
+    frame_number = 0
+
+    if args.spreadsheet:
+        # Initialize the tracking data list
+        tracking_data = []
+
     # Disable logging output from the YOLOv8 model
     logging.getLogger("ultralytics").setLevel(logging.CRITICAL)
 
@@ -77,6 +84,9 @@ def main(args):
                 # Run YOLOv8 tracking on the frame, persisting tracks between frames
                 results = model.track(frame, persist=True, show_conf=False, show=False, conf=args.confidence, tracker=args.tracker)
                 
+                # add the frame number
+                frame_number += 1
+                # Initialize the object count
                 object_count = 0
 
                 # Extract boxes from results and draw them manually
@@ -93,6 +103,16 @@ def main(args):
                         font_scale = 0.7
                         color = (255, 0, 0)  # blue
                         thickness = 2
+
+                        if args.spreadsheet:
+                            # Append data to the tracking_data list in the format of your template
+                            tracking_data.append({
+                                'Current Frame': frame_number,
+                                'X Bound, Left': x1,
+                                'X Bound, Right': x2,
+                                'Y Bound, Upper': y1,
+                                'Y Bound, Lower': y2
+                            })
 
                         # Draw a rectangle (bounding box)
                         cv2.rectangle(frame, (x1, y1), (x2, y2), color, thickness)
@@ -151,6 +171,13 @@ def main(args):
 
     if args.export:
         print(f"Video with bounding boxes saved to {args.output}")
+    
+    if args.spreadsheet:
+        # Save the tracking data as a spreadsheet
+        import pandas as pd
+        df = pd.DataFrame(tracking_data)
+        df.to_csv("tracking_data_spreadsheet.csv", index=False)
+        print("Tracking data saved as 'tracking_data_spreadsheet.csv'")
 
 if __name__ == "__main__":
     # Argument parser to handle command-line arguments
@@ -174,6 +201,12 @@ if __name__ == "__main__":
     #     default=True,
     #     help="Show only detected brittle starfish in the video. otherwise it will also making bounding boxes over other detectable objects as `others`."
     # )
+    parser.add_argument(
+        "--spreadsheet",
+        action="store_true",
+        default=False,
+        help="Export the tracking results as a spreadsheet file."
+    )
     parser.add_argument(
         "--model", 
         type=str, 
