@@ -50,7 +50,7 @@ The script `annotator.py` was used to automate parts of this process, enabling e
 To train the YOLOv8 model on the custom dataset, use the following command:
 
 ```shell
-yolo task=detect mode=train model='yolov8m.yaml', pretrained='/models/best.pt' data='/content/MAC-4/data.yaml' epochs=100 imgsz=640 batch=16 name='FP_v7' 
+yolo task=detect mode=train model='yolov8m.yaml', pretrained='/models/best.pt' data='path/to_your/data.yaml' epochs=100 imgsz=640 batch=16 name='FP_v7' 
 ```
 
 ## Testing
@@ -58,7 +58,7 @@ yolo task=detect mode=train model='yolov8m.yaml', pretrained='/models/best.pt' d
 To test the YOLOv8 model on the custom dataset, use the following command:
 
 ```shell
-yolo task=detect mode=test model='yolov8m.yaml', weights='/models/best.pt' data='/content/MAC-4/data.yaml' 
+yolo task=detect mode=test model='yolov8m.yaml', weights='/models/best.pt' data='path/to_your/data.yaml' 
 ```
 
 ## Video Inference
@@ -76,6 +76,10 @@ To get information about the available options, you can pass the `--help` flag
 ```shell
 python tracker.py --video input_video.mp4 --model yolov8m.pt --export_model --device cpu
 ```
+
+You can also find a sample usage of this script in the Kaggle Notebook below:
+
+<a href="https://www.kaggle.com/code/sinabehnam1999/tracker"><img src="https://kaggle.com/static/images/open-in-kaggle.svg" alt="Open Tracker In Kaggle"></a>
 
 ## Acknowledgements
 
