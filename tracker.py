@@ -86,6 +86,9 @@ def main(args):
                 
                 # add the frame number
                 frame_number += 1
+                # to get the timestamp of the frame
+                timestamp = frame_number / fps
+
                 # Initialize the object count
                 object_count = 0
 
@@ -107,7 +110,7 @@ def main(args):
                         if args.spreadsheet:
                             # Append data to the tracking_data list in the format of your template
                             tracking_data.append({
-                                'Current Frame': frame_number,
+                                'Current Frame': timestamp,
                                 'X Bound, Left': x1,
                                 'X Bound, Right': x2,
                                 'Y Bound, Upper': y1,
